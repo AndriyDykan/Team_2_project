@@ -1,7 +1,6 @@
 import shutil
 import re
 import zipfile
-import py7zr
 import os
 import sys
 from pathlib import Path
