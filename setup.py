@@ -10,5 +10,5 @@ setup(name='bot',
       packages=['bot_folder'],
       install_requires=['py7zr'],
       entry_points={'console_scripts': [
-          'bot = bot_folder.bot:main']}
+          'bot = bot_folder.start_bot:main']}
       )
