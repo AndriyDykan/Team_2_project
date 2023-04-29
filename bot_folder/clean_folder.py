@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 from unicodedata import normalize, is_normalized
 import bot_folder.export_func as basic
+import py7zr
 
 
 # Загальний список файлів
