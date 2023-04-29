@@ -8,6 +8,7 @@ setup(name='bot',
       author_email='msprivate68@gmail.com',
       license='MIT',
       packages=find_namespace_packages(),
+      install_requires=['py7zr'],
       entry_points={'console_scripts': [
           'bot = bot_folder.bot:main']}
       )
