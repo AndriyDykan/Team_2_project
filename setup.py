@@ -1,7 +1,7 @@
 from setuptools import setup, find_namespace_packages
 
 setup(name='bot', 
-      version='0.0.5',
+      version='0.0.1',
       description='bot',
       url='https://github.com/melser68/materials_for_project',
       author='melser68',
