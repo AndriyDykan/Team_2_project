@@ -1,8 +1,8 @@
-import bot_folder.export_func as basic
-import bot_folder.module_classes_2 as class_exp
+import export_func as basic
+import module_classes_2 as class_exp
 import time
-from bot_folder.intellect_input import recognize_command as neurone
-from bot_folder.clean_folder import main as clean
+from intellect_input import recognize_command as neurone
+from clean_folder import main as clean
 import os
 
 book = class_exp.Record()
