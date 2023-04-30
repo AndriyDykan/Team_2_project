@@ -310,26 +310,25 @@ class Record:
                 for key, value in dct.items():
                     if key == 'date_birth':
                         date_b = value
+            if date_b != 'No date':
+                date_b = value.split('-')[0] + '-' + value.split('-')[1] + '-' + now_day.strftime('%Y')
+                date_b = datetime.strptime(date_b, '%d-%m-%Y')
 
-            date_b = value.split(
-                '-')[0] + '-' + value.split('-')[1] + '-' + now_day.strftime('%Y')
-            date_b = datetime.strptime(date_b, '%d-%m-%Y')
+                if datetime.isoweekday(date_b) == 6:
+                    date_b += timedelta(2)
+                elif datetime.isoweekday(date_b) == 7:
+                    date_b += timedelta(1)
 
-            if datetime.isoweekday(date_b) == 6:
-                date_b += timedelta(2)
-            elif datetime.isoweekday(date_b) == 7:
-                date_b += timedelta(1)
+                day_in_week = date_b.strftime('%A')
 
-            day_in_week = date_b.strftime('%A')
+                if now_day <= date_b <= date_end:
 
-            if now_day <= date_b <= date_end:
-
-                rez = dict_birth_in_week.get(day_in_week)
-                if rez == None:
-                    dict_birth_in_week.update({day_in_week: [name]})
-                else:
-                    rez.append(name)
-                    dict_birth_in_week.update({day_in_week: rez})
+                    rez = dict_birth_in_week.get(day_in_week)
+                    if rez == None:
+                        dict_birth_in_week.update({day_in_week: [name]})
+                    else:
+                        rez.append(name)
+                        dict_birth_in_week.update({day_in_week: rez})
 
         return dict_birth_in_week
 
@@ -365,5 +364,6 @@ class Record:
         date_end = self.delta_dates(now_day)
 
         res_jubilars = self.anniversaries_in_the_week(now_day, date_end)
+        
 
         self.print_result(res_jubilars)
