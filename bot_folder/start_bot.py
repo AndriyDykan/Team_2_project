@@ -17,22 +17,25 @@ def main_menu():
     os.system('CLS')
     print('==== main menu ====')
     print('How can I help you?')
-    print('1. - Phonebook\n2. - Calendar jubilars\n3. - Clean Folder\n4. - Note\n5. - Exit\nYour chois:')
+    print('"Phonebook" - opening phonebook menu\n"Calendar jubilars" - opening calendar\n'
+          '"Clean Folder" - opening a file sorting application\n'
+          '"Note" - opening a notebook\n"Exit" - exit from the program\n'
+          'Your chois (enter a command from the above list):')
 
     chois = neurone()    
-    if chois == '1':
+    if chois == 'Phonebook':
         phone_menu()
-    elif chois == '2':
+    elif chois == 'Calendar jubilars':
         calendar_menu()
-    elif chois == '3':
+    elif chois == 'Clean folder':
         response =clean()
         if response == None:
             main_menu()
-    elif chois == '4':
+    elif chois == 'Note':
         print('Menu item in development mode, sorry')
         time.sleep(3)
         main_menu()
-    elif chois == '5':        
+    elif chois == 'Exit':
         basic.input_output(chois)
     else:
         main_menu()
@@ -42,14 +45,14 @@ def phone_menu():
 
     os.system('CLS')
     print('==== phonebook menu ====')
-    print('add - adding a contact to the phonebook\nchange - change an existing contact'
-          '\nphone - contact information by name\nshow all - list of all contacts\n'
-          'del - deleting a contact from the phonebook\nexit - exit to main menu'
-          '\nYour chois:')
+    print('"Add" - adding a contact to the phonebook\n"Change" - change an existing contact'
+          '\n"Search info" - search contact information by name\n"Show all" - list of all contacts\n'
+          '"Del" - deleting a contact from the phonebook\n"Exit" - exit to main menu'
+          '\nYour chois (enter a command from the above list):')
 
     
     chois = neurone()
-    if chois == 'add':
+    if chois == 'Add':
         os.system('CLS')
         print('==== adding contact ===')
         
@@ -99,7 +102,7 @@ def phone_menu():
         phone_menu()           
 
 
-    elif chois == 'change':
+    elif chois == 'Change':
         status = True        
         
         while status == True:
@@ -156,13 +159,13 @@ def phone_menu():
 
             
 
-    elif chois == 'phone':
+    elif chois == 'Search phone':
 
         os.system('CLS')       
 
         status = True
         while status == True:
-            print('==== contact information ====')
+            print('==== search contact information ====')
             print('enter contact name')
             name_contact = input ('>>>>  ')
             result_names = book.search_kontakts(name_contact)
@@ -201,7 +204,7 @@ def phone_menu():
         else:
             main_menu()
 
-    elif chois == 'show all':
+    elif chois == 'Show all':
         book.show_all_record()
         print('Return in menu phonebook ?(yes/no)')
         if input('>>>>  ').lower() == 'yes':
@@ -209,7 +212,7 @@ def phone_menu():
         else:
             main_menu()
 
-    elif chois == 'del':
+    elif chois == 'Del':
         status = True
         while status == True: 
             os.system('CLS')
@@ -263,7 +266,7 @@ def phone_menu():
                     status = False
                     main_menu()                    
 
-    elif chois == 'exit':
+    elif chois == 'Exit':
         main_menu()
 
     else:

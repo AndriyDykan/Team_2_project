@@ -1,14 +1,13 @@
 import time
 
 
-COMMANDS = ['add', 'change', 'del', 'create', 'exit', 'note',
-            'Phonebook', 'Calendar jubilars', '1', '2', '3', '4','5', 'phone', 'show all', 'Clean Folder']
+COMMANDS = ['Phonebook', 'Calendar jubilars', 'Clean folder', 'Note', 'Exit', 
+            'Add', 'Chahge', 'Search info', 'Show all', 'Del']
 
 
 def recognize_command():
     status = True
-    while status == True:
-        print('Enter the command')
+    while status == True:        
         text = input('>>>>  ')
         res_dict = {}
         for i in COMMANDS:
