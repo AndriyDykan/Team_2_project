@@ -1,5 +1,8 @@
-#import bot_folder.module_classes_2 as class_exp
-import module_classes_2 as class_exp
+
+try:
+    import bot_folder.module_classes_2 as class_exp
+except ModuleNotFoundError:
+    import module_classes_2 as class_exp
 import os
 
 # Перевірка імені контакта на коректність

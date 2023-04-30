@@ -4,8 +4,10 @@ import zipfile
 import os
 from pathlib import Path
 from unicodedata import normalize, is_normalized
-#import bot_folder.export_func as basic
-import export_func as basic
+try:
+    import bot_folder.export_func as basic
+except ModuleNotFoundError:
+    import export_func as basic
 import py7zr
 
 

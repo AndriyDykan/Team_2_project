@@ -1,12 +1,14 @@
 
-#import bot_folder.export_func as basic
-#import bot_folder.module_classes_2 as class_exp
-#from bot_folder.intellect_input import recognize_command as neurone
-#from bot_folder.clean_folder import main as clean
-import export_func as basic
-import module_classes_2 as class_exp
-from intellect_input import recognize_command as neurone
-from clean_folder import main as clean
+try:
+    import bot_folder.export_func as basic
+    import bot_folder.module_classes_2 as class_exp
+    from bot_folder.intellect_input import recognize_command as neurone
+    from bot_folder.clean_folder import main as clean
+except ModuleNotFoundError:
+    import export_func as basic
+    import module_classes_2 as class_exp
+    from intellect_input import recognize_command as neurone
+    from clean_folder import main as clean
 import time
 import os
 
@@ -278,7 +280,7 @@ def phone_menu():
 def calendar_menu():
     os.system('CLS')
     book.get_jubilars()
-    print('='*30)
+    print('*'*56)
     print('Return in main menu (yes/no)')
     chois_2 = input('>>>>  ')
     if chois_2.lower() == 'yes':

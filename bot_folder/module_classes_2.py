@@ -301,7 +301,6 @@ class Record:
         return True
 
     # Збираємо список юбілярів
-
     def anniversaries_in_the_week(self, now_day, date_end):
         dict_birth_in_week = {}
 
@@ -332,6 +331,24 @@ class Record:
 
         return dict_birth_in_week
 
+    #Рахуємо кількість днів до дати народження контакту
+    def get_number_of_days_before_date_of_birth(self, now_day):
+        dict_before_day = {}
+
+        for name, record in self.book.items():
+            for dct in record:
+                for key, value in dct.items():
+                    if key == 'date_birth':
+                        date_b = value
+            if date_b != 'No date':
+                date_b = value.split(
+                    '-')[0] + '-' + value.split('-')[1] + '-' + now_day.strftime('%Y')
+                date_b = datetime.strptime(date_b, '%d-%m-%Y')
+                dict_before_day[str((date_b - now_day).days)] = name
+        dict_before_day = sorted(dict_before_day.items())
+        return dict_before_day
+        
+
     # Отримуємо поточну дату
     @staticmethod
     def now_days():
@@ -345,15 +362,24 @@ class Record:
         date_end = now_day + delta_dates
         return date_end
 
-
+    #Друк списку юбілярів та кількосьі днів до юбілею контактів
     @staticmethod
-    def print_result(res_jubilars):
-        if len(res_jubilars) == 0:
-            print('No anniversaries for the next week')
-        else:
+    def print_result(res_jubilars, res_day_before_birth):
+        os.system('CLS')
+        if len(res_jubilars) != 0:
+            print('List of anniversaries for next week')
+            print('=' * 35)
             for key, value in res_jubilars.items():
                 a = (',  ').join(value)
                 print(key, ' : ', a)
+        print('=' * 35)
+        if len(res_day_before_birth) == 0:
+            print("Contacts don't have birthdays")            
+        else:            
+            print('Until the birthday of the contact left ...')
+            print('*' * 56)
+            for record in res_day_before_birth:
+                print(f'At the contact {record[1]} Birthday through {record[0]} days')
 
 
     #основна функція друку списку юбілярів
@@ -364,6 +390,6 @@ class Record:
         date_end = self.delta_dates(now_day)
 
         res_jubilars = self.anniversaries_in_the_week(now_day, date_end)
-        
+        res_day_before_birth = self.get_number_of_days_before_date_of_birth(now_day)
 
-        self.print_result(res_jubilars)
+        self.print_result(res_jubilars, res_day_before_birth)
