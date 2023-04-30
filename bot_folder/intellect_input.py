@@ -2,7 +2,7 @@ import time
 
 
 COMMANDS = ['Phonebook', 'Calendar jubilars', 'Clean folder', 'Note', 'Exit', 
-            'Add', 'Change', 'Search info', 'Show all', 'Del']
+            'Add', 'Change', 'Search info', 'Show all', 'Del', 'Export JSON']
 
 
 def recognize_command():

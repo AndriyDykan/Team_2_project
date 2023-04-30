@@ -3,7 +3,7 @@ try:
     import bot_folder.module_classes_2 as class_exp
 except ModuleNotFoundError:
     import module_classes_2 as class_exp
-import os
+import os, json
 
 # Перевірка імені контакта на коректність
 def check_name(name):
@@ -74,3 +74,10 @@ def input_output(text_user):
     else:        
         print('=== GoobBye ! ===')
         return False
+
+
+#Експорт даних у формати JSON
+def export_json (record):
+    with open('data_bot.json', 'w') as fh:
+        json.dump(record, fh)
+

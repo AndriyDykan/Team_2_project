@@ -21,7 +21,9 @@ def main_menu():
     print('How can I help you?')
     print('"Phonebook" - opening phonebook menu\n"Calendar jubilars" - opening calendar\n'
           '"Clean Folder" - opening a file sorting application\n'
-          '"Note" - opening a notebook\n"Exit" - exit from the program\n'
+          '"Note" - opening a notebook\n'
+          '"Export JSON" - Export data to JSON\n'
+          '"Exit" - exit from the program\n'
           'Your chois (enter a command from the above list):')
 
     chois = neurone()    
@@ -39,6 +41,8 @@ def main_menu():
         main_menu()
     elif chois == 'Exit':
         basic.input_output(chois)
+    elif chois == 'Export JSON':
+        json_menu()       
     else:
         main_menu()
 
@@ -287,6 +291,24 @@ def calendar_menu():
         main_menu()
     else:
         basic.input_output('goodbye')
+
+
+def json_menu():
+    os.system('CLS')
+    print('=' * 30)
+    print('Select data to export')
+    print('=' * 30)
+    print('Phonebook\nNote\nYour chois (enter a command from the above list):')
+    choice = neurone()
+    if choice == 'Phonebook':
+        basic.export_json(book.book.data)
+    else:
+        #basic.export_json(Тут вставте словник з нотатками)
+        pass
+    print('Data upload was successful')
+    time.sleep(3)
+    main_menu()
+
 
 
 def main():
