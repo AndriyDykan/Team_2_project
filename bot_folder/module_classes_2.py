@@ -249,7 +249,7 @@ class Record:
         res_search = {}
 
         for kontakt, num_tel in self.book.items():
-            if name_contact in kontakt.lower():
+            if name_contact.lower() in kontakt.lower():
                 res_search.update({kontakt: num_tel})
 
         return res_search

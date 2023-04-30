@@ -1,13 +1,14 @@
-from setuptools import setup, find_namespace_packages
+from setuptools import setup, find_packages
 
 setup(name='bot', 
-      version='0.0.8',
+      version='0.0.1',
       description='bot',
       url='https://github.com/melser68/materials_for_project',
       author='melser68',
       author_email='msprivate68@gmail.com',
       license='MIT',
-      packages=find_namespace_packages(),
+      packages=['bot_folder'],
+      install_requires=['py7zr'],
       entry_points={'console_scripts': [
-          'bot = bot_folder.bot:main']}
+          'bot = bot_folder.start_bot:main']}
       )
