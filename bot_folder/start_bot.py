@@ -159,7 +159,7 @@ def phone_menu():
 
             
 
-    elif chois == 'Search phone':
+    elif chois == 'Search info':
 
         os.system('CLS')       
 
