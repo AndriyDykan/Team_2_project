@@ -1,12 +1,14 @@
 
-#import bot_folder.export_func as basic
-#import bot_folder.module_classes_2 as class_exp
-#from bot_folder.intellect_input import recognize_command as neurone
-#from bot_folder.clean_folder import main as clean
-import export_func as basic
-import module_classes_2 as class_exp
-from intellect_input import recognize_command as neurone
-from clean_folder import main as clean
+try:
+    import bot_folder.export_func as basic
+    import bot_folder.module_classes_2 as class_exp
+    from bot_folder.intellect_input import recognize_command as neurone
+    from bot_folder.clean_folder import main as clean
+except ModuleNotFoundError:
+    import export_func as basic
+    import module_classes_2 as class_exp
+    from intellect_input import recognize_command as neurone
+    from clean_folder import main as clean
 import time
 import os
 
@@ -17,23 +19,30 @@ def main_menu():
     os.system('CLS')
     print('==== main menu ====')
     print('How can I help you?')
-    print('1. - Phonebook\n2. - Calendar jubilars\n3. - Clean Folder\n4. - Note\n5. - Exit\nYour chois:')
+    print('"Phonebook" - opening phonebook menu\n"Calendar jubilars" - opening calendar\n'
+          '"Clean Folder" - opening a file sorting application\n'
+          '"Note" - opening a notebook\n'
+          '"Export JSON" - Export data to JSON\n'
+          '"Exit" - exit from the program\n'
+          'Your chois (enter a command from the above list):')
 
     chois = neurone()    
-    if chois == '1':
+    if chois == 'Phonebook':
         phone_menu()
-    elif chois == '2':
+    elif chois == 'Calendar jubilars':
         calendar_menu()
-    elif chois == '3':
+    elif chois == 'Clean folder':
         response =clean()
         if response == None:
             main_menu()
-    elif chois == '4':
+    elif chois == 'Note':
         print('Menu item in development mode, sorry')
         time.sleep(3)
         main_menu()
-    elif chois == '5':        
+    elif chois == 'Exit':
         basic.input_output(chois)
+    elif chois == 'Export JSON':
+        json_menu()       
     else:
         main_menu()
 
@@ -42,14 +51,14 @@ def phone_menu():
 
     os.system('CLS')
     print('==== phonebook menu ====')
-    print('add - adding a contact to the phonebook\nchange - change an existing contact'
-          '\nphone - contact information by name\nshow all - list of all contacts\n'
-          'del - deleting a contact from the phonebook\nexit - exit to main menu'
-          '\nYour chois:')
+    print('"Add" - adding a contact to the phonebook\n"Change" - change an existing contact'
+          '\n"Search info" - search contact information by name\n"Show all" - list of all contacts\n'
+          '"Del" - deleting a contact from the phonebook\n"Exit" - exit to main menu'
+          '\nYour chois (enter a command from the above list):')
 
     
     chois = neurone()
-    if chois == 'add':
+    if chois == 'Add':
         os.system('CLS')
         print('==== adding contact ===')
         
@@ -99,7 +108,7 @@ def phone_menu():
         phone_menu()           
 
 
-    elif chois == 'change':
+    elif chois == 'Change':
         status = True        
         
         while status == True:
@@ -156,13 +165,13 @@ def phone_menu():
 
             
 
-    elif chois == 'phone':
+    elif chois == 'Search info':
 
         os.system('CLS')       
 
         status = True
         while status == True:
-            print('==== contact information ====')
+            print('==== search contact information ====')
             print('enter contact name')
             name_contact = input ('>>>>  ')
             result_names = book.search_kontakts(name_contact)
@@ -201,7 +210,7 @@ def phone_menu():
         else:
             main_menu()
 
-    elif chois == 'show all':
+    elif chois == 'Show all':
         book.show_all_record()
         print('Return in menu phonebook ?(yes/no)')
         if input('>>>>  ').lower() == 'yes':
@@ -209,7 +218,7 @@ def phone_menu():
         else:
             main_menu()
 
-    elif chois == 'del':
+    elif chois == 'Del':
         status = True
         while status == True: 
             os.system('CLS')
@@ -263,7 +272,7 @@ def phone_menu():
                     status = False
                     main_menu()                    
 
-    elif chois == 'exit':
+    elif chois == 'Exit':
         main_menu()
 
     else:
@@ -275,13 +284,31 @@ def phone_menu():
 def calendar_menu():
     os.system('CLS')
     book.get_jubilars()
-    print('='*30)
+    print('*'*56)
     print('Return in main menu (yes/no)')
     chois_2 = input('>>>>  ')
     if chois_2.lower() == 'yes':
         main_menu()
     else:
         basic.input_output('goodbye')
+
+
+def json_menu():
+    os.system('CLS')
+    print('=' * 30)
+    print('Select data to export')
+    print('=' * 30)
+    print('Phonebook\nNote\nYour chois (enter a command from the above list):')
+    choice = neurone()
+    if choice == 'Phonebook':
+        basic.export_json(book.book.data)
+    else:
+        #basic.export_json(Тут вставте словник з нотатками)
+        pass
+    print('Data upload was successful')
+    time.sleep(3)
+    main_menu()
+
 
 
 def main():
