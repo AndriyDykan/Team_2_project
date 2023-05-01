@@ -5,6 +5,7 @@ try:
     from bot_folder.intellect_input import recognize_command as neurone
     from bot_folder.clean_folder import main as clean
 except ModuleNotFoundError:
+    from note import main
     import export_func as basic
     import module_classes_2 as class_exp
     from intellect_input import recognize_command as neurone
@@ -36,9 +37,7 @@ def main_menu():
         if response == None:
             main_menu()
     elif chois == 'Note':
-        print('Menu item in development mode, sorry')
-        time.sleep(3)
-        main_menu()
+        main()
     elif chois == 'Exit':
         basic.input_output(chois)
     elif chois == 'Export JSON':
