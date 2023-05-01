@@ -17,17 +17,18 @@ rez = list()
 res_files = list()
 
 # Списки суфіксів для сортування
-list_img = ['.JPEG', '.jpeg', '.PNG', '.png',
-'.JPG', '.jpg', '.SVG', '.svg']
-list_archives = ['.rar', '.RAR', '.zip', '.ZIP',
-'.gz', '.GZ', '.tar', '.TAR', '.7z', '.7Z']
-list_videos = ['.AVI', '.avi', '.MP4', '.mp4',
-'.MOV', '.mov', '.MKV', '.mkv']
-list_documents = ['.DOC', '.doc', '.DOCX', '.docs',
- '.TXT', '.txt','.PDF', '.pdf', '.XLSX', '.xlsx', 
-'.PPTX', '.pptx', '.xml', '.XML']
-list_musics = ['.MP3', '.mp3', '.OGG', '.ogg', 
-'.WAV', '.wav', '.AMR', '.amr']
+list_img = ['.jpg', '.jpeg', '.png', '.svg', '.bmp', '.svg', '.gif', '.webp', '.tiff', 
+            '.ico', '.psd', '.eps', '.pict', '.pcx', '.cdr', '.ai', '.raw']
+list_archives = ['.zip', '.gz', '.tar', '.rar', '.7z', '.dmg', '.iso']
+list_videos = ['.avi', '.flv', '.wmv', '.mov', '.mp4', '.webm', '.vob', '.mpg', '.mpeg',
+                '.3gp', '.mkv', '.swf', '.ifo', '.rm', '.ra', '.ram', '.m2v', '.m2p']
+list_documents = ['.txt', '.doc', '.docx', '.docm', '.pdf', '.md', '.epub', '.ods', '.dotx', 
+                  '.odt', '.xml', '.ppt', '.pptx', '.csv', '.xls', '.xlsx', '.wpd', '.rtf', 
+                  '.rtfd', '.rvg', '.dox']
+list_musics = ['.aac', '.m4a', '.mp3', '.ogg', '.wav', '.wma', '.amr',
+               '.midi', 'flac', '.alac', '.aiff', '.mqa', '.dsd', '.asf', '.vqf', '.3ga']
+list_programming = ['.html', '.htm', '.xhtml', '.py', '.pyw',
+                    '.apk', '.npbk', '.torrent', '.fig', '.exe', '.msi']
 
 #Бібліотека суфіксів для сортування
 dict_suffix ={
@@ -35,22 +36,24 @@ dict_suffix ={
                   'archives':list_archives, 
                   'videos':list_videos, 
                   'musics':list_musics,
-                  'documents': list_documents
+                  'documents': list_documents,
+                  'programing': list_programming
                   }
 
-# Списки знайдених суфіксів
+# Списки знайдених суфіксів'
 suffix_images = set()
 suffix_archives = set()
 suffix_videos = set()
 suffix_documents = set()
 suffix_musics = set()
 suffix_other = set()
+suffix_prog = set()
 
 # Бібліотека знайдених суфіксів
 dict_suffix_res = {'suffix_images': suffix_images, 'suffix_archives': suffix_archives,
                    'suffix_videos': suffix_videos, 'suffix_documents': suffix_documents,
-                   'suffix_musics': suffix_musics, 'suffix_others': suffix_other
-                   }
+                   'suffix_musics': suffix_musics, 'suffix_others': suffix_other, 
+                   'suffix_progs': suffix_prog}
 
 # Списки відсортованих файлів
 res_images = []
@@ -59,12 +62,13 @@ res_videos = []
 res_documents = []
 res_musics = []
 res_others = []
+res_progs = []
 
 #Бібліотека відсортованих файлів
 dict_sorting_files = {'res_images': res_images, 'res_archives': res_archives,
                       'res_videos': res_videos, 'res_documents': res_documents,
-                      'res_musics': res_musics, 'res_others': res_others
-                     }
+                      'res_musics': res_musics, 'res_others': res_others,
+                      'res_progs': res_progs}
 
 
 # Нормалізуємо назву файлу
