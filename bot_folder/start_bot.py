@@ -2,17 +2,21 @@
 try:
     import bot_folder.export_func as basic
     import bot_folder.module_classes_2 as class_exp
+    import bot_folder.module_classes_note as class_note
     from bot_folder.intellect_input import recognize_command as neurone
     from bot_folder.clean_folder import main as clean
 except ModuleNotFoundError:
     import export_func as basic
     import module_classes_2 as class_exp
+    import module_classes_note as class_note
     from intellect_input import recognize_command as neurone
     from clean_folder import main as clean
 import time
 import os
 
+#Створюємо екземпляри класів телефкниги та нотаток
 book = class_exp.Record()
+note = class_note.Record()
 
 def main_menu():
 
@@ -27,18 +31,16 @@ def main_menu():
           'Your chois (enter a command from the above list):')
 
     chois = neurone()    
-    if chois == 'Phonebook':
+    if chois == 'Phonebook':        
         phone_menu()
-    elif chois == 'Calendar jubilars':
+    elif chois == 'Calendar jubilars':        
         calendar_menu()
     elif chois == 'Clean folder':
         response =clean()
         if response == None:
             main_menu()
-    elif chois == 'Note':
-        print('Menu item in development mode, sorry')
-        time.sleep(3)
-        main_menu()
+    elif chois == 'Note':        
+        note_menu()
     elif chois == 'Exit':
         basic.input_output(chois)
     elif chois == 'Export JSON':
@@ -301,13 +303,49 @@ def json_menu():
     print('Phonebook\nNote\nYour chois (enter a command from the above list):')
     choice = neurone()
     if choice == 'Phonebook':
-        basic.export_json(book.book.data)
+        basic.export_json(book.book.data, choice)
     else:
-        #basic.export_json(Тут вставте словник з нотатками)
+        basic.export_json(note.ex_note.data, choice)
         pass
     print('Data upload was successful')
     time.sleep(3)
     main_menu()
+
+
+#Логіка роботи з нотатками
+def note_menu():
+    
+    os.system('CLS')
+    print('==== Note Menu ====')
+
+    print('New note - Сreate a new note\nEdit note - Edit an existing note\n'
+            'Search note - Search for an existing note\nDelete note - Delete an existing note\n'
+            'Print notes - Print notes by topic'
+            '\nYour chois (enter a command from the above list):')
+
+    choice = neurone()
+    if choice == 'New note':
+        note.add_note()        
+    elif choice == 'Edit note':
+        note.edit_note()
+    elif choice == 'Search note':
+        note.search_note()        
+    elif choice == 'Delete note':
+        note.del_note()        
+    elif choice == 'Print notes':
+        note.print_notes()        
+    else:
+        print('Incorrect choice')
+        time.sleep(2)
+        note_menu()
+
+    #Можливість повренутися) у головне меню
+    print('Return in main menu ? (yes/no)')
+    choice = input('>>>>  ')
+    if choice.lower() == 'yes':
+        main_menu()
+    else:
+        note_menu()
 
 
 
