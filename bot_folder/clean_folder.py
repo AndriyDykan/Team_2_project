@@ -22,13 +22,10 @@ list_img = ['.jpg', '.jpeg', '.png', '.svg', '.bmp', '.svg', '.gif', '.webp', '.
 list_archives = ['.zip', '.gz', '.tar', '.rar', '.7z', '.dmg', '.iso']
 list_videos = ['.avi', '.flv', '.wmv', '.mov', '.mp4', '.webm', '.vob', '.mpg', '.mpeg',
                 '.3gp', '.mkv', '.swf', '.ifo', '.rm', '.ra', '.ram', '.m2v', '.m2p']
-list_documents = ['.txt', '.doc', '.docx', '.docm', '.pdf', '.md', '.epub', '.ods', '.dotx', 
-                  '.odt', '.xml', '.ppt', '.pptx', '.csv', '.xls', '.xlsx', '.wpd', '.rtf', 
-                  '.rtfd', '.rvg', '.dox']
+list_documents = ['.txt', '.doc', '.docx', '.docm', '.pdf', '.md', '.epub', '.ods', '.dotx', '.odt', '.xml', '.ppt', '.pptx', '.csv', '.xls', '.xlsx', '.wpd', '.rtf', '.rtfd', '.rvg', '.dox']
 list_musics = ['.aac', '.m4a', '.mp3', '.ogg', '.wav', '.wma', '.amr',
                '.midi', 'flac', '.alac', '.aiff', '.mqa', '.dsd', '.asf', '.vqf', '.3ga']
-list_programming = ['.html', '.htm', '.xhtml', '.py', '.pyw',
-                    '.apk', '.npbk', '.torrent', '.fig', '.exe', '.msi']
+list_progs = ['.html', '.htm', '.xhtml', '.py', '.pyw', '.apk', '.torrent', '.fig', '.exe', '.msi', '.woff', '.woff2']
 
 #Бібліотека суфіксів для сортування
 dict_suffix ={
@@ -37,7 +34,7 @@ dict_suffix ={
                   'videos':list_videos, 
                   'musics':list_musics,
                   'documents': list_documents,
-                  'programing': list_programming
+                  'progs': list_progs
                   }
 
 # Списки знайдених суфіксів'
@@ -47,13 +44,13 @@ suffix_videos = set()
 suffix_documents = set()
 suffix_musics = set()
 suffix_other = set()
-suffix_prog = set()
+suffix_progs = set()
 
 # Бібліотека знайдених суфіксів
 dict_suffix_res = {'suffix_images': suffix_images, 'suffix_archives': suffix_archives,
                    'suffix_videos': suffix_videos, 'suffix_documents': suffix_documents,
-                   'suffix_musics': suffix_musics, 'suffix_others': suffix_other, 
-                   'suffix_progs': suffix_prog}
+                   'suffix_musics': suffix_musics, 'suffix_others': suffix_other,
+                   'suffix_progs': suffix_progs}
 
 # Списки відсортованих файлів
 res_images = []
