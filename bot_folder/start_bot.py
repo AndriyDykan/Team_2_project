@@ -13,6 +13,7 @@ except ModuleNotFoundError:
     from clean_folder import main as clean
 import time
 import os
+import json
 
 #Створюємо екземпляри класів телефкниги та нотаток
 book = class_exp.Record()
@@ -315,29 +316,48 @@ def json_menu():
 #Логіка роботи з нотатками
 def note_menu():
     
-    os.system('CLS')
-    print('==== Note Menu ====')
-
-    print('New note - Сreate a new note\nEdit note - Edit an existing note\n'
-            'Search note - Search for an existing note\nDelete note - Delete an existing note\n'
-            'Print notes - Print notes by topic'
-            '\nYour chois (enter a command from the above list):')
-
-    choice = neurone()
-    if choice == 'New note':
-        note.add_note()        
-    elif choice == 'Edit note':
-        note.edit_note()
-    elif choice == 'Search note':
-        note.search_note()        
-    elif choice == 'Delete note':
-        note.del_note()        
-    elif choice == 'Print notes':
-        note.print_notes()        
-    else:
-        print('Incorrect choice')
+    while True:
+        print("Choose an action:")
+        print("1. New note - create a new note >>> press 1 ")
+        print("2. Change note - edit an existing note >>> press 2")
+        print("3. Search note - search for an existing note >>> press 3")
+        print("4. Delete note - delete an existing note >>> press 4")
+        print("5. Print notes - print notes by topic >>> press 5")
+        print("6. Return to the main menu >>> press 6")
+        choice = input("Your choice: ").strip()
+        if choice == '1':
+            print('Choose an option:')
+            print('1. Enter note manually')
+            print('2. Load note from a file')
+            note_choice = input('Your choice: ').strip()
+            if note_choice == '1':
+                note.add_note()
+            elif note_choice == '2':
+                file_path = input('Enter file path: ')
+                try:
+                    note.load_notes_from_file(file_path)
+                except FileNotFoundError:
+                    print('File not found')
+                except json.JSONDecodeError:
+                    print('Invalid JSON format')
+            else:
+                print('Incorrect choice')
+        elif choice == '2':
+            title = input("Enter the title of the note you want to edit: ")
+            note.edit_note(title)
+        elif choice == '3':
+            tags = input("Enter tags to search for (comma-separated): ").split(",")
+            result_notes = note.search_notes_by_tags([tag.strip() for tag in tags])
+        elif choice == '4':
+            title = input("Enter the title of the note you want to delete: ")
+            note.delete_note(title)
+        elif choice == '5':
+           note.print_notes(note.notes)
+        elif choice == '6':
+            break
+        else:
+            print('Incorrect choice')
         time.sleep(2)
-        note_menu()
 
     #Можливість повренутися) у головне меню
     print('Return in main menu ? (yes/no)')
