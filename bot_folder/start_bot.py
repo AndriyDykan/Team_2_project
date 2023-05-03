@@ -315,7 +315,7 @@ def json_menu():
 
 #Логіка роботи з нотатками
 def note_menu():
-    
+    os.system('CLS')
     while True:
         print("Choose an action:")
         print("1. New note - create a new note >>> press 1 ")
