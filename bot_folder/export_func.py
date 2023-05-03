@@ -1,8 +1,10 @@
 
 try:
     import bot_folder.module_classes_2 as class_exp
+    import bot_folder.module_classes_note as class_note
 except ModuleNotFoundError:
     import module_classes_2 as class_exp
+    import module_classes_note as class_note
 import os, json
 
 # Перевірка імені контакта на коректність
@@ -77,7 +79,12 @@ def input_output(text_user):
 
 
 #Експорт даних у формати JSON
-def export_json (record):
-    with open('data_bot.json', 'w') as fh:
+def export_json (record, name_file):
+    name = name_file.lower() + '_bot'
+    with open(f'{name}.json', 'w') as fh:
         json.dump(record, fh)
+
+
+
+
 

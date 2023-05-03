@@ -2,17 +2,22 @@
 try:
     import bot_folder.export_func as basic
     import bot_folder.module_classes_2 as class_exp
+    import bot_folder.module_classes_note as class_note
     from bot_folder.intellect_input import recognize_command as neurone
     from bot_folder.clean_folder import main as clean
 except ModuleNotFoundError:
     import export_func as basic
     import module_classes_2 as class_exp
+    import module_classes_note as class_note
     from intellect_input import recognize_command as neurone
     from clean_folder import main as clean
 import time
 import os
+import json
 
+#Створюємо екземпляри класів телефкниги та нотаток
 book = class_exp.Record()
+note = class_note.Record()
 
 def main_menu():
 
@@ -27,18 +32,16 @@ def main_menu():
           'Your chois (enter a command from the above list):')
 
     chois = neurone()    
-    if chois == 'Phonebook':
+    if chois == 'Phonebook':        
         phone_menu()
-    elif chois == 'Calendar jubilars':
+    elif chois == 'Calendar jubilars':        
         calendar_menu()
     elif chois == 'Clean folder':
         response =clean()
         if response == None:
             main_menu()
-    elif chois == 'Note':
-        print('Menu item in development mode, sorry')
-        time.sleep(3)
-        main_menu()
+    elif chois == 'Note':        
+        note_menu()
     elif chois == 'Exit':
         basic.input_output(chois)
     elif chois == 'Export JSON':
@@ -301,13 +304,76 @@ def json_menu():
     print('Phonebook\nNote\nYour chois (enter a command from the above list):')
     choice = neurone()
     if choice == 'Phonebook':
-        basic.export_json(book.book.data)
+        basic.export_json(book.book.data, choice)
     else:
-        #basic.export_json(Тут вставте словник з нотатками)
+        basic.export_json(note.notes, choice)
         pass
     print('Data upload was successful')
     time.sleep(3)
     main_menu()
+
+
+#Логіка роботи з нотатками
+def note_menu():
+    os.system('CLS')
+    while True:
+        print("Choose an action:")
+        print("1. New note - create a new note >>> press 1 ")
+        print("2. Change note - edit an existing note >>> press 2")
+        print("3. Search note - search for an existing note >>> press 3")
+        print("4. Delete note - delete an existing note >>> press 4")
+        print("5. Print notes - print notes by topic >>> press 5")
+        print("6. Return to the main menu >>> press 6")
+        choice = input("Your choice: ").strip()
+        if choice == '1':
+            print('Choose an option:')
+            print('1. Enter note manually')
+            print('2. Load note from a file')
+            note_choice = input('Your choice: ').strip()
+            if note_choice == '1':
+                note.add_note()
+            elif note_choice == '2':
+                file_path = input('Enter file path: ')
+                try:
+                    note.load_notes_from_file(file_path)
+                except FileNotFoundError:
+                    print('File not found')
+                except json.JSONDecodeError:
+                    print('Invalid JSON format')
+            else:
+                print('Incorrect choice')
+        elif choice == '2':
+            title = input("Enter the title of the note you want to edit: ")
+            note.edit_note(title)
+        elif choice == '3':
+            tags = input("Enter tags to search for (comma-separated): ").split(",")
+            result_notes = note.search_notes_by_tags([tag.strip() for tag in tags])
+            print('Return in menu note?(yes/no)')
+            chois = input('>>>>  ')
+            if chois.lower() == 'yes':
+               note_menu()
+        elif choice == '4':
+            title = input("Enter the title of the note you want to delete: ")
+            note.delete_note(title)
+        elif choice == '5':
+           note.print_notes(note.notes)
+           print('Return in menu note?(yes/no)')
+           chois = input('>>>>  ')
+           if chois.lower() == 'yes':
+               note_menu()
+        elif choice == '6':
+            break
+        else:
+            print('Incorrect choice')
+        time.sleep(2)
+
+    #Можливість повренутися) у головне меню
+    print('Return in main menu ? (yes/no)')
+    choice = input('>>>>  ')
+    if choice.lower() == 'yes':
+        main_menu()
+    else:
+        note_menu()
 
 
 

@@ -2,7 +2,8 @@ import time
 
 
 COMMANDS = ['Phonebook', 'Calendar jubilars', 'Clean folder', 'Note', 'Exit', 
-            'Add', 'Change', 'Search info', 'Show all', 'Del', 'Export JSON']
+            'Add', 'Change', 'Search info', 'Show all', 'Del', 'Export JSON', 
+            'New note', 'Edit note', 'Delete note', 'Print notes', 'Search note']
 
 
 def recognize_command():
@@ -24,8 +25,6 @@ def recognize_command():
             if choice_1.lower() == 'no':
                 status = False
         else:
-            print(f'Command recognized as : "{choice}"')
-            time.sleep(3)
             status = False            
     return choice
 
