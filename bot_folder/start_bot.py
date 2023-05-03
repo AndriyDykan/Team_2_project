@@ -306,7 +306,7 @@ def json_menu():
     if choice == 'Phonebook':
         basic.export_json(book.book.data, choice)
     else:
-        basic.export_json(note.ex_note.data, choice)
+        basic.export_json(note.notes, choice)
         pass
     print('Data upload was successful')
     time.sleep(3)
@@ -348,11 +348,19 @@ def note_menu():
         elif choice == '3':
             tags = input("Enter tags to search for (comma-separated): ").split(",")
             result_notes = note.search_notes_by_tags([tag.strip() for tag in tags])
+            print('Return in menu note?(yes/no)')
+            chois = input('>>>>  ')
+            if chois.lower() == 'yes':
+               note_menu()
         elif choice == '4':
             title = input("Enter the title of the note you want to delete: ")
             note.delete_note(title)
         elif choice == '5':
            note.print_notes(note.notes)
+           print('Return in menu note?(yes/no)')
+           chois = input('>>>>  ')
+           if chois.lower() == 'yes':
+               note_menu()
         elif choice == '6':
             break
         else:
