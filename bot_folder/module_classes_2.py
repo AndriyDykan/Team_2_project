@@ -344,7 +344,8 @@ class Record:
                 date_b = value.split(
                     '-')[0] + '-' + value.split('-')[1] + '-' + now_day.strftime('%Y')
                 date_b = datetime.strptime(date_b, '%d-%m-%Y')
-                dict_before_day[str((date_b - now_day).days)] = name
+                if (date_b - now_day).days > 0:
+                    dict_before_day[str((date_b - now_day).days)] = name
         dict_before_day = sorted(dict_before_day.items())
         return dict_before_day
         
