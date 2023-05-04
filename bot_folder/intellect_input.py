@@ -18,7 +18,8 @@ def recognize_command():
                     if y in list(i.lower()):
                         percent += 100 / len(list(i))
                     res_dict[i] = percent
-        choice = max(res_dict, key=res_dict.get)
+        if len(res_dict) != 0:
+            choice = max(res_dict, key=res_dict.get)
         if sum(res_dict.values()) == 0:
             print('Command not recognized. Re-enter? (yes/no)')
             choice_1 = input('>>>>  ')

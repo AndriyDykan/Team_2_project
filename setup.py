@@ -11,5 +11,5 @@ setup(name='botteam2',
       install_requires=['py7zr'],
       include_package_data=True,
       entry_points={'console_scripts': [
-          'bot = bot_folder.start_bot:main']}
+          'botteam2 = bot_folder.start_bot:main']}
       )
